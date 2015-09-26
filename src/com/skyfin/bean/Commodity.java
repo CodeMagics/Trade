@@ -2,6 +2,7 @@ package com.skyfin.bean;
 /*
  * @author Shan
  * time:2015/9/26
+ * Commdity bean
  */
 
 public class Commodity {
