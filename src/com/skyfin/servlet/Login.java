@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
 import com.skyfin.bean.User;
-import com.skyfin.daoimpl.Userloginimpl;
+import com.skyfin.daoimpl.UserDaoImpl;
 
 public class Login extends HttpServlet {
 
@@ -69,21 +69,15 @@ public class Login extends HttpServlet {
 
 		// 新建一个实体
 		User user = new User();
-		user.setUsername(username);
-		user.setPasswd(passwd);
+		user.setUserName(username);
+		user.setPassWord(passwd);
 
 		// 用户登陆的接口
-		Userloginimpl muserloginimpl = new Userloginimpl();
-		try {
-			if (muserloginimpl.LoginJudge(user)) {
-				out.println("登陆成功");
-			} else {
-				muserloginimpl.add(user);
-				out.println("用户名或者密码错误");
-			}
-		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
+		UserDaoImpl muserloginimpl = new UserDaoImpl();
+		if (muserloginimpl.login(user) != null) {
+			out.println("登陆成功");
+		} else {
+			out.println("用户名或者密码错误");
 		}
 		// 刷新
 		out.flush();
