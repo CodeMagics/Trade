@@ -1,4 +1,7 @@
 package com.skyfin.bean;
+/*
+ * uername 
+ */
 
 public class User {
 
