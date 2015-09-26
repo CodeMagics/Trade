@@ -1,4 +1,6 @@
 package com.skyfin.bean;
+
+import java.util.List;
 /*
  * @author Shan
  * time:2015/9/26
@@ -12,6 +14,13 @@ public class Commodity {
 	private String commIntro;
 	private int commPrice;
 	private String commPic;
+	private String commType;
+	public String getCommType() {
+		return commType;
+	}
+	public void setCommType(String commType) {
+		this.commType = commType;
+	}
 	public int getId() {
 		return id;
 	}
@@ -48,4 +57,5 @@ public class Commodity {
 	public void setCommPic(String commPic) {
 		this.commPic = commPic;
 	}
+
 }
