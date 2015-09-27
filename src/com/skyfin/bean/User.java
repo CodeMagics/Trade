@@ -13,10 +13,6 @@ public class User {
 	private String introduction;
 	private int phone;
 	private String img;
-	@Override
-	public String toString() {
-		return "User [username=" + userName + ", passwd=" + passWord + "]";
-	}
 	public User() {
 		super();
 		// TODO 自动生成的构造函数存根

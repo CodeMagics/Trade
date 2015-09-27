@@ -139,4 +139,34 @@ public class UserDaoImpl implements UserDao{
 		return false;
 	}
 
+	@Override
+	public User info(String id) {
+		String sql="select user_id,user_cardid,user_nickname,user_password,user_email,user_introduction,user_phone,user_image from user where user_cardid=?";
+		DBUtil util=new DBUtil();
+		Connection conn = util.openConnection();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt(1));
+				user.setUserName(rs.getString(2));
+				user.setNickName(rs.getString(3));
+				user.setPassWord(rs.getString(4));
+				user.setEmail(rs.getString(5));
+				user.setIntroduction(rs.getString(6));
+				user.setPhone(rs.getInt(7));
+				user.setImg(rs.getString(8));
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		return null;
+	}
+
 }

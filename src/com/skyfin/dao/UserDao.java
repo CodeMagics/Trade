@@ -30,5 +30,7 @@ public interface UserDao {
     
     public boolean delete(String idNum);
     
+    public User info(String id);
+    
     public User login(User user);
 }
