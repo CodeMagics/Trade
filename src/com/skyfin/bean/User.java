@@ -5,11 +5,17 @@ package com.skyfin.bean;
 
 public class User {
 
-	private String username;
-	private String passwd;
+	private int id;
+	private String userName;
+	private String nickName;
+	private String passWord;
+	private String email;
+	private String introduction;
+	private int phone;
+	private String img;
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", passwd=" + passwd + "]";
+		return "User [username=" + userName + ", passwd=" + passWord + "]";
 	}
 	public User() {
 		super();
@@ -17,20 +23,55 @@ public class User {
 	}
 	public User(String username, String passwd) {
 		super();
-		this.username = username;
-		this.passwd = passwd;
+		this.userName = username;
+		this.passWord = passwd;
 	}
-	public String getUsername() {
-		return username;
+	public int getId() {
+		return id;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getPasswd() {
-		return passwd;
+	public String getUserName() {
+		return userName;
 	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getPassWord() {
+		return passWord;
+	}
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getIntroduction() {
+		return introduction;
+	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+	public int getPhone() {
+		return phone;
+	}
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 }

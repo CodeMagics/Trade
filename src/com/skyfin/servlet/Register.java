@@ -2,24 +2,20 @@ package com.skyfin.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.PortableInterceptor.LOCATION_FORWARD;
-
 import com.skyfin.bean.User;
 import com.skyfin.daoimpl.UserDaoImpl;
 
-public class Login extends HttpServlet {
-
+public class Register extends HttpServlet{
 	/**
 	 * Constructor of the object.
 	 */
-	public Login() {
+	public Register() {
 		super();
 	}
 
@@ -61,23 +57,32 @@ public class Login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		//
 		String username = request.getParameter("username");
+		String nickname = request.getParameter("nickname");
 		String passwd = request.getParameter("passwd");
+		String email = request.getParameter("email");
+		
 
 		// 获取到param内容
 		username = new String(username.getBytes("ISO-8859-1"), "UTF-8");
+		nickname = new String(nickname.getBytes("ISO-8859-1"), "UTF-8");
 		passwd = new String(passwd.getBytes("ISO-8859-1"), "UTF-8");
+		email = new String(email.getBytes("ISO-8859-1"), "UTF-8");
 
-		// 新建一个实体
-		User user = new User();
-		user.setUserName(username);
-		user.setPassWord(passwd);
 
-		// 用户登陆的接口
+		// 用户注册的接口
 		UserDaoImpl muserloginimpl = new UserDaoImpl();
-		if (muserloginimpl.login(user) != null) {
-			out.println("登陆成功");
+		if (muserloginimpl.checkUser(username)) {
+			out.println("用户名已存在");
 		} else {
-			out.println("用户名或者密码错误");
+			User user = new User();
+			user.setUserName(username);
+			user.setNickName(nickname);
+			user.setPassWord(passwd);
+			user.setEmail(email);
+			if(muserloginimpl.insert(user))
+				out.println("注册成功");
+			else
+				out.println("注册失败");
 		}
 		// 刷新
 		out.flush();
@@ -95,5 +100,4 @@ public class Login extends HttpServlet {
 	public void init() throws ServletException {
 		// Put your code here
 	}
-
 }

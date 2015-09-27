@@ -2,24 +2,20 @@ package com.skyfin.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.PortableInterceptor.LOCATION_FORWARD;
-
 import com.skyfin.bean.User;
 import com.skyfin.daoimpl.UserDaoImpl;
 
-public class Login extends HttpServlet {
-
+public class Update extends HttpServlet{
 	/**
 	 * Constructor of the object.
 	 */
-	public Login() {
+	public Update() {
 		super();
 	}
 
@@ -60,25 +56,33 @@ public class Login extends HttpServlet {
 		// 输出流
 		PrintWriter out = response.getWriter();
 		//
-		String username = request.getParameter("username");
+		String nickname = request.getParameter("nickname");
 		String passwd = request.getParameter("passwd");
+		String introduction = request.getParameter("introduction");
+		String phone = request.getParameter("phone");
+		String img = request.getParameter("img");
+		
 
 		// 获取到param内容
-		username = new String(username.getBytes("ISO-8859-1"), "UTF-8");
+		nickname = new String(nickname.getBytes("ISO-8859-1"), "UTF-8");
 		passwd = new String(passwd.getBytes("ISO-8859-1"), "UTF-8");
+		introduction = new String(introduction.getBytes("ISO-8859-1"), "UTF-8");
+		phone = new String(phone.getBytes("ISO-8859-1"), "UTF-8");
+		img = new String(img.getBytes("ISO-8859-1"), "UTF-8");
 
-		// 新建一个实体
-		User user = new User();
-		user.setUserName(username);
-		user.setPassWord(passwd);
 
-		// 用户登陆的接口
+		// 用户注册的接口
 		UserDaoImpl muserloginimpl = new UserDaoImpl();
-		if (muserloginimpl.login(user) != null) {
-			out.println("登陆成功");
-		} else {
-			out.println("用户名或者密码错误");
-		}
+		User user = new User();
+		user.setNickName(nickname);
+		user.setPassWord(passwd);
+		user.setIntroduction(introduction);
+		user.setPhone(Integer.parseInt(phone));
+		user.setImg(img);
+		if(muserloginimpl.update(user))
+			out.println("更新成功");
+		else
+			out.println("更新失败");
 		// 刷新
 		out.flush();
 		// 关闭
@@ -95,5 +99,4 @@ public class Login extends HttpServlet {
 	public void init() throws ServletException {
 		// Put your code here
 	}
-
 }
