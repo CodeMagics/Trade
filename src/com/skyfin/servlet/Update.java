@@ -80,9 +80,9 @@ public class Update extends HttpServlet{
 		user.setPhone(Integer.parseInt(phone));
 		user.setImg(img);
 		if(muserloginimpl.update(user))
-			out.println("更新成功");
+			out.print("105");
 		else
-			out.println("更新失败");
+			out.print("106");
 		// 刷新
 		out.flush();
 		// 关闭

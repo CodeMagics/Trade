@@ -75,9 +75,9 @@ public class Login extends HttpServlet {
 		// 用户登陆的接口
 		UserDaoImpl muserloginimpl = new UserDaoImpl();
 		if (muserloginimpl.login(user) != null) {
-			out.println("登陆成功");
+			out.print("103");
 		} else {
-			out.println("用户名或者密码错误");
+			out.print("104");
 		}
 		// 刷新
 		out.flush();

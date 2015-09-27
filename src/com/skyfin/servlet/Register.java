@@ -72,7 +72,7 @@ public class Register extends HttpServlet{
 		// 用户注册的接口
 		UserDaoImpl muserloginimpl = new UserDaoImpl();
 		if (muserloginimpl.checkUser(username)) {
-			out.println("用户名已存在");
+			out.print("102");
 		} else {
 			User user = new User();
 			user.setUserName(username);
@@ -80,9 +80,9 @@ public class Register extends HttpServlet{
 			user.setPassWord(passwd);
 			user.setEmail(email);
 			if(muserloginimpl.insert(user))
-				out.println("注册成功");
+				out.print("100");
 			else
-				out.println("注册失败");
+				out.print("101");
 		}
 		// 刷新
 		out.flush();
