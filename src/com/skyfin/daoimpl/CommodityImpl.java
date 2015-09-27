@@ -6,6 +6,9 @@ import java.util.List;
 import javax.resource.cci.ResultSet;
 
 
+
+
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.skyfin.bean.Commodity;
@@ -80,7 +83,7 @@ public class CommodityImpl implements CommodityDao {
 
 	@Override
 	public boolean deleteByCommId(String commId) {
-		// TODO Auto-generated method stub
+		
 		String sql = " delete from  commodity where comm_num = ?";
 		DBUtil util = new DBUtil();
 		Connection conn = (Connection) util.openConnection();
@@ -102,7 +105,7 @@ public class CommodityImpl implements CommodityDao {
 	}
 
 	@Override
-	public boolean insertByCommId(Commodity comm) {
+	public boolean insertByCommId(Commodity comm) {  
 		String sql = " insert into commodity (comm_num,comm_title,comm_intro,comm_price,comm_type) VALUES (?,?,?,?,?)";
 		DBUtil util = new DBUtil();
 		Connection conn = (Connection) util.openConnection();
@@ -138,7 +141,7 @@ public class CommodityImpl implements CommodityDao {
 			pstmt.setString(1, comm.getCommNum());
 			pstmt.setString(2, comm.getCommTitle());
 			pstmt.setString(3, comm.getCommIntro());
-			pstmt.setInt(4, comm.getCommPrice());
+			pstmt.setInt(4,comm.getCommPrice());
 			pstmt.setString(5, comm.getCommType());
 			pstmt.setInt(6, comm.getId());
 
@@ -153,5 +156,31 @@ public class CommodityImpl implements CommodityDao {
 		}
 		return false;
 	}
+	
+	@SuppressWarnings("null")
+	public List<String> selectByCommNum(String commId){
+		List<String> picPath=null;
+		String sql="SELECT album.ablu_pic FROM album,commodity WHERE album.ablu_id=commodity.comm_num";
+		DBUtil util=new DBUtil();
+		Connection conn = (Connection) util.openConnection();
+		try {
+			PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+
+			ResultSet rs = (ResultSet) pstmt.executeQuery();
+			while (rs.next()) {
+				String path;
+				path=rs.getString(1);
+				picPath.add(path);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		return picPath;
+	}
+	
 
 }

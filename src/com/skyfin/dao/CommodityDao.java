@@ -34,6 +34,12 @@ public interface CommodityDao {
 	 * @param  商品
 	 */
 	public  boolean updateByCommId(Commodity comm);
+	/*
+	 * @param 商品编号
+	 * @return 图片路径
+	 */
+	public List<String> selectByCommNum(String commId);
+	
 	
 	
 	
