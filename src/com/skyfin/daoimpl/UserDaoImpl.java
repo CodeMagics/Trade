@@ -12,7 +12,7 @@ import com.skyfin.dao.UserDao;
 public class UserDaoImpl implements UserDao{
 	@Override
 	public User login(User user) {
-		String sql="select user_id from user where user_name=? and user_password=?";
+		String sql="select user_id from user where user_cardid=? and user_password=?";
 		DBUtil util=new DBUtil();
 		Connection conn = util.openConnection();
 		String username = user.getUserName();
@@ -116,7 +116,7 @@ public class UserDaoImpl implements UserDao{
 	
 	@Override
 	public boolean checkUser(String username) {
-		String sql="select * from user where user_name=?";
+		String sql="select user_cardid from user where user_cardid=?";
 		DBUtil util=new DBUtil();
 		Connection conn = util.openConnection();
 		try {
