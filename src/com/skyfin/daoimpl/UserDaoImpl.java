@@ -11,7 +11,7 @@ import com.skyfin.dao.UserDao;
 
 public class UserDaoImpl implements UserDao{
 	@Override
-	public User login(User user) {
+	public boolean login(User user) {
 		String sql="select user_id from user where user_cardid=? and user_password=?";
 		DBUtil util=new DBUtil();
 		Connection conn = util.openConnection();
@@ -25,19 +25,14 @@ public class UserDaoImpl implements UserDao{
 
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				int id = rs.getInt(1);
-				User tmpuser = new User();
-				tmpuser.setId(id);
-				tmpuser.setPassWord(password);
-				tmpuser.setUserName(username);
-				return tmpuser;
+				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			util.closeConn(conn);
 		}
-		return null;
+		return false;
 	}
 
 	@Override

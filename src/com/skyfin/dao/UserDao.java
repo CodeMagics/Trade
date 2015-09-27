@@ -32,5 +32,5 @@ public interface UserDao {
     
     public User info(String id);
     
-    public User login(User user);
+    public boolean login(User user);
 }
