@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.skyfin.bean.User;
 import com.skyfin.daoimpl.UserDaoImpl;
 
-public class Register extends HttpServlet{
+public class Update extends HttpServlet{
 	/**
 	 * Constructor of the object.
 	 */
-	public Register() {
+	public Update() {
 		super();
 	}
 
@@ -56,34 +56,33 @@ public class Register extends HttpServlet{
 		// 输出流
 		PrintWriter out = response.getWriter();
 		//
-		String username = request.getParameter("username");
 		String nickname = request.getParameter("nickname");
 		String passwd = request.getParameter("passwd");
-		String email = request.getParameter("email");
+		String introduction = request.getParameter("introduction");
+		String phone = request.getParameter("phone");
+		String img = request.getParameter("img");
 		
 
 		// 获取到param内容
-		username = new String(username.getBytes("ISO-8859-1"), "UTF-8");
 		nickname = new String(nickname.getBytes("ISO-8859-1"), "UTF-8");
 		passwd = new String(passwd.getBytes("ISO-8859-1"), "UTF-8");
-		email = new String(email.getBytes("ISO-8859-1"), "UTF-8");
+		introduction = new String(introduction.getBytes("ISO-8859-1"), "UTF-8");
+		phone = new String(phone.getBytes("ISO-8859-1"), "UTF-8");
+		img = new String(img.getBytes("ISO-8859-1"), "UTF-8");
 
 
 		// 用户注册的接口
 		UserDaoImpl muserloginimpl = new UserDaoImpl();
-		if (muserloginimpl.checkUser(username)) {
-			out.println("用户名已存在");
-		} else {
-			User user = new User();
-			user.setUserName(username);
-			user.setNickName(nickname);
-			user.setPassWord(passwd);
-			user.setEmail(email);
-			if(muserloginimpl.insert(user))
-				out.println("注册成功");
-			else
-				out.println("注册失败");
-		}
+		User user = new User();
+		user.setNickName(nickname);
+		user.setPassWord(passwd);
+		user.setIntroduction(introduction);
+		user.setPhone(Integer.parseInt(phone));
+		user.setImg(img);
+		if(muserloginimpl.update(user))
+			out.println("更新成功");
+		else
+			out.println("更新失败");
 		// 刷新
 		out.flush();
 		// 关闭
