@@ -59,7 +59,7 @@ public class Relationimpl implements RelationDao{
 	}
 
 	@Override
-	public boolean update(Relation rela, String relaCommId){
+	public boolean update(Relation rela){
 		String sql = " update  rela set rela_userid = ?,rela_commid= ?where rela_id = ?";
 		DBUtil util = new DBUtil();
 		Connection conn = (Connection) util.openConnection();

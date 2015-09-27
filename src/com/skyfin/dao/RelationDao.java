@@ -20,7 +20,7 @@ public interface RelationDao {
 		 * @param relaCommId 商品编号
 		 * @return 修改成功返回true 否则返回false
 		 */
-		public boolean update(Relation rela,String relaCommId);
+		public boolean update(Relation rela);
 		/**
 		 * 通过用户编号查找关系
 		 * @param relaUserId 用户编号
