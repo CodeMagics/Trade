@@ -1,9 +1,9 @@
 package com.skyfin.servlet;
 
-import java.awt.List;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -67,9 +67,9 @@ public class ShowCollection extends HttpServlet{
 		username = new String(username.getBytes("ISO-8859-1"), "UTF-8");
 		// 查询用户信息的接口
 		CollectDaoImpl collectimpl = new CollectDaoImpl();
-		//java.util.List<Commodity> commlist = collectimpl.select(username);
-		//String jsonStrng = JSON.toJSONString(commlist);
-		//out.print(jsonStrng);
+		List<Commodity> commlist = collectimpl.select(username);
+		String jsonStrng = JSON.toJSONString(commlist);
+		out.print(jsonStrng);
 		System.out.println(collectimpl.select(username));
 		// 刷新
 		out.flush();
