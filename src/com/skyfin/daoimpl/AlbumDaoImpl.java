@@ -1,11 +1,17 @@
 package com.skyfin.daoimpl;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.resource.cci.ResultSet;
 
-import com.mysql.jdbc.Connection;
+
+
+
+
+
 import com.mysql.jdbc.PreparedStatement;
 import com.skyfin.bean.Album;
 import com.skyfin.dao.AlbumDao;
@@ -18,8 +24,8 @@ public class AlbumDaoImpl implements AlbumDao {
 	public List<String> selectByCommId(String commNum) {
 		String sql="select ablu_pic from album where ablu_id=?";
 		DBUtil util=new DBUtil();
-		List<String> picPath=null;
-		Connection conn = (Connection) util.openConnection();
+		List<String> picPath=new ArrayList<String>();
+		Connection conn =util.openConnection();
 		try {
 			PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
 

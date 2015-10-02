@@ -33,6 +33,20 @@
     <servlet-name>UserInfo</servlet-name>
     <servlet-class>com.skyfin.servlet.UserInfo</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowGoods</servlet-name>
+    <servlet-class>com.skyfin.servlet.ShowGoods</servlet-class>
+  </servlet>
+   <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GoodsNum</servlet-name>
+    <servlet-class>com.skyfin.servlet.GoodsNum</servlet-class>
+  </servlet>
+  
+
 
 
 
@@ -52,6 +66,14 @@
   <servlet-mapping>
     <servlet-name>UserInfo</servlet-name>
     <url-pattern>/servlet/UserInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowGoods</servlet-name>
+    <url-pattern>/servlet/ShowGoods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GoodsNum</servlet-name>
+    <url-pattern>/servlet/GoodsNum</url-pattern>
   </servlet-mapping>
 
 </web-app>
