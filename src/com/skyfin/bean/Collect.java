@@ -1,5 +1,10 @@
 package com.skyfin.bean;
 
+
+/**
+ * @author yu
+ *
+ */
 public class Collect {
 	private int id;
 	private String userid;

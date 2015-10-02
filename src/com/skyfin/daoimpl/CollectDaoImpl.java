@@ -87,5 +87,30 @@ public class CollectDaoImpl implements CollectDao{
 		}
 		return commList;
 	}
+	
+	@Override
+	public boolean checkcollection(String username,String commid)throws SQLException{
+		String sql = "select coll_id from collection where coll_userid=? and coll_comm=?";
+		DBUtil util=new DBUtil();
+		Connection conn = util.openConnection();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, username);
+			pstmt.setString(2, commid);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		return false;
+	}
 
 }
