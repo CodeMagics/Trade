@@ -79,7 +79,7 @@ public class CollectDaoImpl implements CollectDao{
 				comm.setCommTitle(rs.getString(3));
 				comm.setCommIntro(rs.getString(4));
 				comm.setCommPrice(rs.getInt(5) );
-				comm.setCommType(rs.getString(6));
+				comm.setCommType(rs.getInt(6));
 				commList.add(comm);
 			}
 		} catch (SQLException e) {
