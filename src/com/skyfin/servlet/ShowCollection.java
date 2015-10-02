@@ -14,6 +14,11 @@ import com.alibaba.fastjson.JSON;
 import com.skyfin.bean.Commodity;
 import com.skyfin.daoimpl.CollectDaoImpl;
 
+/**
+ * @author yu
+ * 显示用户收藏商品截图
+ *
+ */
 public class ShowCollection extends HttpServlet{
 	/**
 	 * Constructor of the object.
