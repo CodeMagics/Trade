@@ -37,14 +37,15 @@ public class CollectDaoImpl implements CollectDao{
 	}
 
 	@Override
-	public boolean delete(String id){
-		String sql = " delete from  collection where collection_userid = ?";
+	public boolean delete(String username,String commid){
+		String sql = " delete from  collection where coll_userid = ? and coll_comm = ?";
 		DBUtil util = new DBUtil();
 		Connection conn = util.openConnection();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, id); 
+			pstmt.setString(1, username); 
+			pstmt.setString(2, commid);
 			if (pstmt.executeUpdate() > 0)
 				return true;
 			else

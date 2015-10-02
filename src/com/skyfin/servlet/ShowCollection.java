@@ -67,9 +67,10 @@ public class ShowCollection extends HttpServlet{
 		username = new String(username.getBytes("ISO-8859-1"), "UTF-8");
 		// 查询用户信息的接口
 		CollectDaoImpl collectimpl = new CollectDaoImpl();
-		java.util.List<Commodity> commlist = collectimpl.select(username);
-		String jsonStrng = JSON.toJSONString(commlist);
-		out.print(jsonStrng);
+		//java.util.List<Commodity> commlist = collectimpl.select(username);
+		//String jsonStrng = JSON.toJSONString(commlist);
+		//out.print(jsonStrng);
+		System.out.println(collectimpl.select(username));
 		// 刷新
 		out.flush();
 		// 关闭

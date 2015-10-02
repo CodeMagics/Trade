@@ -8,15 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.skyfin.bean.Collect;
 import com.skyfin.daoimpl.CollectDaoImpl;
-
-public class MakeCollection extends HttpServlet {
+/*
+ * 在用户收藏界面内进行“取消收藏”操作
+ */
+public class DeleteCollection extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public MakeCollection() {
+	public DeleteCollection() {
 		super();
 	}
 
@@ -55,38 +56,23 @@ public class MakeCollection extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		response.setContentType("text/html");
 		// 设置编码格式
 		response.setCharacterEncoding("utf8");
 		// 输出流
 		PrintWriter out = response.getWriter();
-		//获取参数
+		
 		String username = request.getParameter("username");
 		String commid = request.getParameter("commid");
 		//获取param的内容
-		username = new String(username.getBytes("ISO-8859-1"), "UTF-8");
-        commid = new String(commid.getBytes("ISO-8859-1"),"UTF-8");
-        
-        CollectDaoImpl collectimpl = new CollectDaoImpl();
-        
-        if(collectimpl.checkcollection(username, commid)){
-        	if(collectimpl.delete(username,commid))
-        	out.print("已取消收藏");
-        	else
-        	    out.print("操作失败");
-        }
-        else{
-        	Collect collect = new Collect();
-        	collect.setUserid(username);
-        	collect.setComm(commid); 
-        	if(collectimpl.insert(collect))
-            	out.print("收藏成功");
-        	else 
-        		out.print("收藏失败");
-        	}
-        //刷新
+		username = new String(username.getBytes("ISO-8859-1"),"UTF-8");
+		commid = new String(commid.getBytes("ISO-8859-1"),"UTF-8");
+		CollectDaoImpl collectimpl = new CollectDaoImpl();
+		if(collectimpl.delete(username, commid)){
+			out.print("取消成功");
+		}
 		out.flush();
-		//关闭
 		out.close();
 	}
 
