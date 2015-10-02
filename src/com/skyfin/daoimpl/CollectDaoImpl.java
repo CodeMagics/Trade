@@ -14,15 +14,15 @@ import com.skyfin.util.DBUtil;
 public class CollectDaoImpl implements CollectDao{
 
 	@Override
-	public boolean insert(Collect coll) throws SQLException {
+	public boolean insert(Collect collect){
 		String sql = " insert into collection (coll_userid,coll_comm) VALUES (?,?)";
 		DBUtil util = new DBUtil();
 		Connection conn = util.openConnection();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, coll.getUserid());
-			pstmt.setString(2, coll.getComm());
+			pstmt.setString(1, collect.getUserid());
+			pstmt.setString(2, collect.getComm());
 
 			if (pstmt.executeUpdate() > 0)
 				return true;
@@ -37,7 +37,7 @@ public class CollectDaoImpl implements CollectDao{
 	}
 
 	@Override
-	public boolean delete(String id) throws SQLException {
+	public boolean delete(String id){
 		String sql = " delete from  collection where collection_userid = ?";
 		DBUtil util = new DBUtil();
 		Connection conn = util.openConnection();
@@ -57,8 +57,9 @@ public class CollectDaoImpl implements CollectDao{
 		return false;
 	}
 
+	@SuppressWarnings("null")
 	@Override
-	public List<Commodity> select(String username) throws SQLException {
+	public List<Commodity> select(String username){
 		String sql="select comm_id,comm_num,comm_title,comm_intro,comm_price,comm_pic,comm_type "
 				+ "from collection,commodity where coll_userid=? and collection.coll_comm=commodity.comm_num";
 		DBUtil util=new DBUtil();
@@ -89,7 +90,7 @@ public class CollectDaoImpl implements CollectDao{
 	}
 	
 	@Override
-	public boolean checkcollection(String username,String commid)throws SQLException{
+	public boolean checkcollection(String username,String commid){
 		String sql = "select coll_id from collection where coll_userid=? and coll_comm=?";
 		DBUtil util=new DBUtil();
 		Connection conn = util.openConnection();
