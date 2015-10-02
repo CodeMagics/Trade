@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.skyfin.bean.Collect;
@@ -65,7 +66,7 @@ public class CollectDaoImpl implements CollectDao{
 				+ "from collection,commodity where coll_userid=? and collection.coll_comm=commodity.comm_num";
 		DBUtil util=new DBUtil();
 		Connection conn = util.openConnection();
-		List<Commodity> commList=null;
+		List<Commodity> commList=new ArrayList<Commodity>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
