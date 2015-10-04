@@ -3,6 +3,7 @@ package com.skyfin.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.skyfin.bean.Album;
 import com.skyfin.bean.Commodity;
 import com.skyfin.daoimpl.CollectDaoImpl;
+import com.skyfin.daoimpl.CommodityImpl;
 
 /**
  * @author yu
@@ -67,10 +70,9 @@ public class ShowCollection extends HttpServlet{
 		username = new String(username.getBytes("ISO-8859-1"), "UTF-8");
 		// 查询用户信息的接口
 		CollectDaoImpl collectimpl = new CollectDaoImpl();
-		List<Commodity> commlist = collectimpl.select(username);
-		String jsonStrng = JSON.toJSONString(commlist);
-		out.print(jsonStrng);
-		System.out.println(collectimpl.select(username));
+		List<Commodity> commlist = collectimpl.select(username);			
+			String jsonStrng = JSON.toJSONString(commlist);
+			out.print(jsonStrng);
 		// 刷新
 		out.flush();
 		// 关闭
