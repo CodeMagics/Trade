@@ -58,6 +58,7 @@
     <servlet-name>ShowCollection</servlet-name>
     <servlet-class>com.skyfin.servlet.ShowCollection</servlet-class>
   </servlet>
+<<<<<<< HEAD
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
@@ -71,6 +72,8 @@
     <servlet-class>com.skyfin.servlet.UpLoadImage</servlet-class>
   </servlet>
 
+=======
+>>>>>>> parent of 2c0a130... 增加了商品上传
 
 
   <servlet-mapping>
@@ -109,6 +112,7 @@
     <servlet-name>ShowCollection</servlet-name>
     <url-pattern>/servlet/ShowCollection</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
   <servlet-mapping>
     <servlet-name>PutRandomString</servlet-name>
     <url-pattern>/servlet/PutRandomString</url-pattern>
@@ -117,5 +121,7 @@
     <servlet-name>UpLoadImage</servlet-name>
     <url-pattern>/servlet/UpLoadImage</url-pattern>
   </servlet-mapping>
+=======
+>>>>>>> parent of 2c0a130... 增加了商品上传
 
 </web-app>
