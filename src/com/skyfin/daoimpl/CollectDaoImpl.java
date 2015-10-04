@@ -36,8 +36,8 @@ public class CollectDaoImpl implements CollectDao{
 		return false;
 	}
 
-	@Override
-	public boolean delete(String username,String commid){
+		@Override
+public boolean delete(String username,String commid){
 		String sql = " delete from  collection where coll_userid = ? and coll_comm = ?";
 		DBUtil util = new DBUtil();
 		Connection conn = util.openConnection();
@@ -61,8 +61,8 @@ public class CollectDaoImpl implements CollectDao{
 	@SuppressWarnings("null")
 	@Override
 	public List<Commodity> select(String username){
-		String sql="select comm_id,comm_num,comm_title,comm_intro,comm_price,comm_pic,comm_type "
-				+ "from collection,commodity where coll_userid=? and collection.coll_comm=commodity.comm_num";
+		String sql="select comm_id,comm_num,comm_title,comm_intro,comm_price,comm_pic,comm_type,ablu_id "
+				+ "from collection,commodity,album where coll_userid=? and collection.coll_comm=commodity.comm_num and album.ablu_id=comm_num";
 		DBUtil util=new DBUtil();
 		Connection conn = util.openConnection();
 		List<Commodity> commList=null;
