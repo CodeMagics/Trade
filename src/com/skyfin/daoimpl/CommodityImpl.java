@@ -1,16 +1,11 @@
 package com.skyfin.daoimpl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-
-
-
-
-
 
 import com.mysql.jdbc.PreparedStatement;
 import com.skyfin.bean.Commodity;
@@ -119,7 +114,7 @@ public class CommodityImpl implements CommodityDao {
 
 	@Override
 	public boolean insertByCommId(Commodity comm) {  
-		String sql = " insert into commodity (comm_num,comm_title,comm_intro,comm_price,comm_type) VALUES (?,?,?,?,?)";
+		String sql = " insert into commodity (comm_num,comm_title,comm_intro,comm_price,comm_type,comm_date) VALUES (?,?,?,?,?,?)";
 		DBUtil util = new DBUtil();
 		Connection conn = (Connection) util.openConnection();
 		try {
@@ -130,6 +125,7 @@ public class CommodityImpl implements CommodityDao {
 			pstmt.setString(3,comm.getCommIntro());
 			pstmt.setInt(4, comm.getCommPrice());
 			pstmt.setInt(5, comm.getCommType());
+			pstmt.setDate(6, new Date(comm.getCommDate().getTime()));
 
 			if (pstmt.executeUpdate() > 0)
 				return true;

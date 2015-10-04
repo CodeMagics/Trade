@@ -1,5 +1,7 @@
 package com.skyfin.bean;
 
+
+import java.util.Date;
 import java.util.List;
 /*
  * @author Shan
@@ -12,16 +14,17 @@ public class Commodity {
 	private String commNum;
 	private String commTitle;
 	private String commIntro;
+	public Date getCommDate() {
+		return commDate;
+	}
+	public void setCommDate(Date commDate) {
+		this.commDate = commDate;
+	}
 	private int commPrice;
-	private String commPic;
+	private String commPic="";
 	private int commType;
-	public List<Album> getCommPicList() {
-		return commPicList;
-	}
-	public void setCommPicList(List<Album> commPicList) {
-		this.commPicList = commPicList;
-	}
-	private List<Album>commPicList;
+    private Date commDate;
+	
 	public int getCommType() {
 		return commType;
 	}
