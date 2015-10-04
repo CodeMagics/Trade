@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.skyfin.bean.Collect;
@@ -65,7 +66,7 @@ public boolean delete(String username,String commid){
 				+ "from collection,commodity,album where coll_userid=? and collection.coll_comm=commodity.comm_num and album.ablu_id=comm_num";
 		DBUtil util=new DBUtil();
 		Connection conn = util.openConnection();
-		List<Commodity> commList=null;
+		List<Commodity> commList=new ArrayList<Commodity>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -79,7 +80,7 @@ public boolean delete(String username,String commid){
 				comm.setCommTitle(rs.getString(3));
 				comm.setCommIntro(rs.getString(4));
 				comm.setCommPrice(rs.getInt(5) );
-				comm.setCommType(rs.getString(6));
+				comm.setCommType(rs.getInt(6));
 				commList.add(comm);
 			}
 		} catch (SQLException e) {

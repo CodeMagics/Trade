@@ -14,11 +14,18 @@ public class Commodity {
 	private String commIntro;
 	private int commPrice;
 	private String commPic;
-	private String commType;
-	public String getCommType() {
+	private int commType;
+	public List<Album> getCommPicList() {
+		return commPicList;
+	}
+	public void setCommPicList(List<Album> commPicList) {
+		this.commPicList = commPicList;
+	}
+	private List<Album>commPicList;
+	public int getCommType() {
 		return commType;
 	}
-	public void setCommType(String commType) {
+	public void setCommType(int commType) {
 		this.commType = commType;
 	}
 	public int getId() {
