@@ -14,7 +14,7 @@ public class RelationDaoImpl implements RelationDao{
 
 	@Override
 	public boolean insert(Relation rela){
-			String sql = "insert into rela(relaUserId,relaCommId) VALUES (?,?)";
+			String sql = "insert into rela(rela_userid,rela_commid) VALUES (?,?)";
 			DBUtil util = new DBUtil();
 			Connection conn = (Connection) util.openConnection();
 			try{

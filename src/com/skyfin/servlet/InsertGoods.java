@@ -109,9 +109,6 @@ public class InsertGoods extends HttpServlet {
 		//获取类型ID
 		TypeDao typedao=new TypeDaoImpl();
 		int id=typedao.selectIdByTypeName(commType);
-		System.out.println("*********"+id+commType);
-		System.out.println("*******");
-		System.out.println("你好");
 		comm.setCommType(id);
 		comm.setCommPic(" ");
 		Date now =new Date();
@@ -127,7 +124,7 @@ public class InsertGoods extends HttpServlet {
 		RelationDao relation = new RelationDaoImpl();
 		boolean isRelaInsert =relation.insert(rela);
 		//上传成功
-		if(isCommInsert){
+		if(isCommInsert&&isRelaInsert){
 			out.print("107");
 		}
 		else{
