@@ -2,8 +2,13 @@ package com.skyfin.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+
+
+
+
+
+import java.util.Date;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,18 +16,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.skyfin.bean.Commodity;
 import com.skyfin.bean.CommodityDetail;
+import com.skyfin.bean.Relation;
 import com.skyfin.dao.AlbumDao;
 import com.skyfin.dao.CommodityDao;
+import com.skyfin.dao.RelationDao;
+import com.skyfin.dao.TypeDao;
 import com.skyfin.daoimpl.AlbumDaoImpl;
 import com.skyfin.daoimpl.CommodityImpl;
+import com.skyfin.daoimpl.RelationDaoImpl;
+import com.skyfin.daoimpl.TypeDaoImpl;
 
-public class ShowGoods extends HttpServlet {
+public class InsertGoods extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public ShowGoods() {
+	public InsertGoods() {
 		super();
 	}
 
@@ -46,7 +57,8 @@ public class ShowGoods extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-     this.doPost(request, response);
+
+            this.doPost(request, response);
 	}
 
 	/**
@@ -66,27 +78,60 @@ public class ShowGoods extends HttpServlet {
 		response.setCharacterEncoding("utf8");
 		// 输出流
 		PrintWriter out = response.getWriter();
-        //获取商品编号
+       
+		String userName= request.getParameter("userName");
 		String commNum = request.getParameter("commNum");
+		String commTitle = request.getParameter("commTitle");
+		String commIntro = request.getParameter("commIntro");
+		String commPrice = request.getParameter("commPrice");
+		String commType = request.getParameter("commType");
+		System.out.println("++"+commType);
+		
 		// 获取到param内容
+		userName = new String(userName.getBytes("ISO-8859-1"), "UTF-8");
 		commNum = new String(commNum.getBytes("ISO-8859-1"), "UTF-8");
-		// 查询商品信息
-	
-		CommodityDetail commdetail=new CommodityDetail();
-		CommodityDao comm=new CommodityImpl();
-		commdetail=comm.selectByCommId(commNum);
+		commTitle = new String(commTitle.getBytes("ISO-8859-1"), "UTF-8");
+		commIntro = new String(commIntro.getBytes("ISO-8859-1"), "UTF-8");
+		commPrice = new String(commPrice.getBytes("ISO-8859-1"), "UTF-8");
+		commType = new String(commType.getBytes("ISO-8859-1"), "UTF-8");
 		
-		AlbumDao ablum=new AlbumDaoImpl();
-		
-		List<String> picPath=new ArrayList<String>();
-		picPath=ablum.selectByCommId(commNum);
-		commdetail.setPicPath(picPath);
+		//*************
 		
 		
-		//转为json
-		String jsonStrng = JSON.toJSONString(commdetail);
-	    out.print(jsonStrng);
+		//set commodity
+		Commodity comm = new Commodity();
+		comm.setCommNum(commNum);
+		comm.setCommPrice(Integer.parseInt(commPrice));
+		comm.setCommTitle(commTitle);
+		comm.setCommIntro(commIntro);
 		
+		
+		//获取类型ID
+		TypeDao typedao=new TypeDaoImpl();
+		int id=typedao.selectIdByTypeName(commType);
+		comm.setCommType(id);
+		comm.setCommPic(" ");
+		Date now =new Date();
+		comm.setCommDate(now);
+		System.out.println(now);
+		//插入商品
+		CommodityDao commDao=new CommodityImpl();
+		boolean isCommInsert=commDao.insertByCommId(comm);
+		//插入关系
+		Relation rela = new Relation();
+		rela.setRelaUserId(userName);
+		rela.setRelaCommId(commNum);
+		RelationDao relation = new RelationDaoImpl();
+		boolean isRelaInsert =relation.insert(rela);
+		//上传成功
+		if(isCommInsert&&isRelaInsert){
+			out.print("107");
+		}
+		else{
+			out.print("108");
+		}
+		
+		  
 		out.flush();
 		out.close();
 	}
