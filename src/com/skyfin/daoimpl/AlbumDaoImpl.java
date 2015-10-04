@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.mysql.jdbc.PreparedStatement;
 import com.skyfin.bean.Album;
 import com.skyfin.dao.AlbumDao;
@@ -16,6 +17,7 @@ public class AlbumDaoImpl implements AlbumDao {
 	@Override
 	public List<String> selectByCommId(String commNum) {
 		String sql="select ablu_pic from album where ablu_id=?";
+		List<String> numList=new ArrayList<String>();
 		DBUtil util=new DBUtil();
 		List<String> picPath=new ArrayList<String>();
 		Connection conn =util.openConnection();
@@ -23,12 +25,10 @@ public class AlbumDaoImpl implements AlbumDao {
 			PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
 
 			pstmt.setString(1, commNum);
-
 			ResultSet rs = (ResultSet) pstmt.executeQuery();
 			while (rs.next()) {
-				String path;
-				path=rs.getString(1);
-				picPath.add(path);
+				String num=rs.getString(1);
+				picPath.add(num);
 				
 			}
 			
@@ -37,6 +37,7 @@ public class AlbumDaoImpl implements AlbumDao {
 		} finally {
 			util.closeConn(conn);
 		}
+		System.out.println(picPath+"*********");
 		return picPath;
 	}
 

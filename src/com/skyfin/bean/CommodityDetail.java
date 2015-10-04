@@ -1,12 +1,13 @@
 package com.skyfin.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommodityDetail {
 	private User user;
 	private String typeName;
 	private List<Album> album;
-	private List<String>picPath;
+	private List<String>picPath=new ArrayList<String>();
 	public User getUser() {
 		return user;
 	}

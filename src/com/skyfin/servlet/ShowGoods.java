@@ -2,6 +2,8 @@ package com.skyfin.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -70,12 +72,16 @@ public class ShowGoods extends HttpServlet {
 		commNum = new String(commNum.getBytes("ISO-8859-1"), "UTF-8");
 		// 查询商品信息
 	
-		CommodityDetail commdetail;
+		CommodityDetail commdetail=new CommodityDetail();
 		CommodityDao comm=new CommodityImpl();
 		commdetail=comm.selectByCommId(commNum);
 		
 		AlbumDao ablum=new AlbumDaoImpl();
-		commdetail.setPicPath(ablum.selectByCommId(commNum));
+		
+		List<String> picPath=new ArrayList<String>();
+		picPath=ablum.selectByCommId(commNum);
+		commdetail.setPicPath(picPath);
+		
 		
 		//转为json
 		String jsonStrng = JSON.toJSONString(commdetail);
