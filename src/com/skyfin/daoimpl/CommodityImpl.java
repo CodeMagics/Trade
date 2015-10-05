@@ -52,7 +52,7 @@ public class CommodityImpl implements CommodityDao {
 //commIdÎªÉÌÆ·±àºÅ
 	@Override
 	public CommodityDetail selectByCommId(String commId) {
-		String sql="select comm_num,comm_title,comm_intro,type_name,comm_price,user_nickname,user_cardid from commodity,rela,user,type where user_cardid=rela_userid and comm_num=? and rela_commid=comm_num "
+		String sql="select comm_num,comm_title,comm_intro,type_name,comm_price,user_nickname,user_cardid,comm_date from commodity,rela,user,type where user_cardid=rela_userid and comm_num=? and rela_commid=comm_num "
 				+ "and type_id=comm_type";
 		DBUtil util=new DBUtil();
 		Connection conn =  util.openConnection();
@@ -74,6 +74,7 @@ public class CommodityImpl implements CommodityDao {
 				comm.setCommTitle(rs.getString(2));
 				comm.setCommIntro(rs.getString(3));
 				comm.setCommPrice(rs.getInt(5));
+				comm.setCommDate(rs.getDate(8));
 				
 				commdetail.setUser(user);
 				commdetail.setCommdity(comm);
