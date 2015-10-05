@@ -72,6 +72,8 @@ public class DeleteCollection extends HttpServlet {
 		if(collectimpl.delete(username, commid)){
 			out.print("取消成功");
 		}
+		else
+			out.print("取消失败");
 		out.flush();
 		out.close();
 	}
