@@ -51,7 +51,7 @@ this.doPost(request, response);
 	        String ImageName = StringRandom.getRandomString(36);
 	        //系统路径
 	         String path = "/usr/local/tomcat7/webapps/Trade/image/";
-	        //String path="D:\360安全浏览器下载";
+	         
 	        //插入图片路径
 	        String picPath=path+ImageName;
 	        Album alb=new Album();
