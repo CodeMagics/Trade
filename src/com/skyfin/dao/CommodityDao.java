@@ -51,10 +51,18 @@ public interface CommodityDao {
 	 */
 	public List<String> getAll();
 	
+	/*
+	 * 通过商品编号查询每个商品的主图
+	 */
+	public String selectByCommNo(String commNum);
+	
+	/*
+	 * 
+	 */
+	public boolean updatePicPathByCommNum(String CommNum,String path);
 	
 	
-	
-	
+
 	
 
 }

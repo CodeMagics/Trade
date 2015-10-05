@@ -217,5 +217,49 @@ public class CommodityImpl implements CommodityDao {
 		return numList;
 		
 	}
+	
+	public String selectByCommNo(String commNum){
+		String pic=null;
+		String sql = "select comm_pic from commodity where comm_num=?";
+		DBUtil util=new DBUtil();
+		Connection conn = util.openConnection();
+		try {
+			PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, commNum);
+			ResultSet rs = (ResultSet) pstmt.executeQuery();
+			if (rs.next()) {
+				pic=rs.getString(1);	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}	
+		return pic;
+	}
 
+	
+	
+	public boolean updatePicPathByCommNum(String commNum,String path){
+		String sql = " update  commodity set comm_pic = ? where comm_id = ?";
+		DBUtil util = new DBUtil();
+		Connection conn = (Connection) util.openConnection();
+		try {
+			PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+
+			pstmt.setString(1,path);
+			pstmt.setString(2, commNum);
+
+			if (pstmt.executeUpdate() > 0)
+				return true;
+			else
+				return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		
+		return false;
+	}
 }

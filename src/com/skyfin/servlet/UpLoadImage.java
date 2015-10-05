@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.skyfin.bean.Album;
+import com.skyfin.bean.Commodity;
+import com.skyfin.dao.AlbumDao;
+import com.skyfin.dao.CommodityDao;
+import com.skyfin.daoimpl.AlbumDaoImpl;
+import com.skyfin.daoimpl.CommodityImpl;
 import com.skyfin.util.StringRandom;
 
 import Decoder.BASE64Decoder;
@@ -44,7 +50,23 @@ this.doPost(request, response);
 	        //图片名称
 	        String ImageName = StringRandom.getRandomString(36);
 	        //系统路径
-	        String path = "/usr/local/tomcat7/webapps/Trade/image/";
+	         String path = "/usr/local/tomcat7/webapps/Trade/image/";
+	        //String path="D:\360安全浏览器下载";
+	        //插入图片路径
+	        String picPath=path+ImageName;
+	        Album alb=new Album();
+	        alb.setAlbuId(commodityid);
+	        alb.setAlbuPic(picPath);
+	        AlbumDao albDao=new AlbumDaoImpl();
+	        albDao.insertAlbum(alb);
+	        //判断是否加入主图
+	        CommodityDao commDao = new CommodityImpl();
+	        String commPic = commDao.selectByCommNo(commodityid);
+	        if(commPic==" "){
+	        	commDao.updatePicPathByCommNum(commodityid, commPic);
+	        }
+	        
+	        
 	        try {  
 	  
 	            // 对base64数据进行解码 生成 字节数组，不能直接用Base64.decode（）；进行解密  

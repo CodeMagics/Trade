@@ -43,6 +43,7 @@ public class AlbumDaoImpl implements AlbumDao {
 	@Override
 	public boolean insertPic(String commNum) {
 		
+		
 		return false;
 	}
 
