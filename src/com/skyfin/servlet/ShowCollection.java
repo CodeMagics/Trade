@@ -70,7 +70,6 @@ public class ShowCollection extends HttpServlet{
 		List<Commodity> commlist = collectimpl.select(username);
 		String jsonStrng = JSON.toJSONString(commlist);
 		out.print(jsonStrng);
-		System.out.println(collectimpl.select(username));
 		// Ë¢ÐÂ
 		out.flush();
 		// ¹Ø±Õ
