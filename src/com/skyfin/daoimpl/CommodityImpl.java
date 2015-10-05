@@ -241,12 +241,12 @@ public class CommodityImpl implements CommodityDao {
 	
 	
 	public boolean updatePicPathByCommNum(String commNum,String path){
-		String sql = " update  commodity set comm_pic = ? where comm_id = ?";
+		String sql = " update  commodity set comm_pic = ? where comm_Num = ?";
 		DBUtil util = new DBUtil();
-		Connection conn = (Connection) util.openConnection();
+		Connection conn =  util.openConnection();
 		try {
 			PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
-
+              System.out.println(path+commNum);
 			pstmt.setString(1,path);
 			pstmt.setString(2, commNum);
 

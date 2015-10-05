@@ -53,17 +53,17 @@ this.doPost(request, response);
 	         String path = "/usr/local/tomcat7/webapps/Trade/image/";
 	         
 	        //插入图片路径
-	        String picPath=path+ImageName;
+	         String picPath=ImageName+".png";
 	        Album alb=new Album();
 	        alb.setAlbuId(commodityid);
 	        alb.setAlbuPic(picPath);
 	        AlbumDao albDao=new AlbumDaoImpl();
-	        albDao.insertAlbum(alb);
-	        //判断是否加入主图
+	        boolean isSuccess=albDao.insertAlbum(alb);
+	        //判断是否加入主图`
 	        CommodityDao commDao = new CommodityImpl();
 	        String commPic = commDao.selectByCommNo(commodityid);
-	        if(commPic==" "){
-	        	commDao.updatePicPathByCommNum(commodityid, commPic);
+	        if(commPic == null || commPic.length() <= 0){
+	        	commDao.updatePicPathByCommNum(commodityid, picPath);
 	        }
 	        
 	        
@@ -90,6 +90,9 @@ this.doPost(request, response);
 	            // TODO Auto-generated catch block  
 	            e.printStackTrace();  
 	        }  
+	        
+	        
+	        
 	}
 
 	public void init() throws ServletException {
