@@ -68,7 +68,11 @@ public class ShowCollection extends HttpServlet{
 		// 查询用户信息的接口
 		CollectDaoImpl collectimpl = new CollectDaoImpl();
 		List<Commodity> commlist = collectimpl.select(username);
-		String jsonStrng = JSON.toJSONString(commlist);
+		String jsonStrng;
+		if(commlist.size()==0)
+			jsonStrng = JSON.toJSONString("112");
+		else
+			jsonStrng = JSON.toJSONString(commlist);
 		out.print(jsonStrng);
 		// 刷新
 		out.flush();

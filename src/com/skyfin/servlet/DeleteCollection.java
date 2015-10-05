@@ -70,10 +70,10 @@ public class DeleteCollection extends HttpServlet {
 		commid = new String(commid.getBytes("ISO-8859-1"),"UTF-8");
 		CollectDaoImpl collectimpl = new CollectDaoImpl();
 		if(collectimpl.delete(username, commid)){
-			out.print("取消成功");
+			out.print("113");
 		}
 		else
-			out.print("取消失败");
+			out.print("114");
 		out.flush();
 		out.close();
 	}

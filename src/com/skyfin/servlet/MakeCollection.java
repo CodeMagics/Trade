@@ -71,18 +71,18 @@ public class MakeCollection extends HttpServlet {
         
         if(collectimpl.checkcollection(username, commid)){
         	if(collectimpl.delete(username,commid))
-        	out.print("已取消收藏");
+        	    out.print("113");
         	else
-        	    out.print("操作失败");
+        	    out.print("114");
         }
         else{
         	Collect collect = new Collect();
         	collect.setUserid(username);
         	collect.setComm(commid); 
         	if(collectimpl.insert(collect))
-            	out.print("收藏成功");
+            	out.print("109");
         	else 
-        		out.print("收藏失败");
+        		out.print("110");
         	}
         //刷新
 		out.flush();
