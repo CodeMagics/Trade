@@ -62,14 +62,14 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public boolean update(User user) {
-		String sql = " update  user set user_nickname = ?,user_password = ?,user_introduction = ?,user_phone = ?,user_image = ? where user_id = ?";
+		String sql = " update  user set user_nickname = ?,user_email = ?,user_introduction = ?,user_phone = ?,user_image = ? where user_id = ?";
 		DBUtil util = new DBUtil();
 		Connection conn = util.openConnection();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, user.getNickName());
-			pstmt.setString(2, user.getPassWord());
+			pstmt.setString(2, user.getEmail());
 			pstmt.setString(3, user.getIntroduction());
 			pstmt.setString(4, Integer.toString(user.getPhone()));
 			pstmt.setString(5, user.getImg());
