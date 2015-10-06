@@ -263,4 +263,48 @@ public class CommodityImpl implements CommodityDao {
 		
 		return false;
 	}
+	
+	
+	
+	public List<CommodityDetail> selectByCommType(String type){
+		List<CommodityDetail>detailList=new ArrayList<CommodityDetail>();
+		String sql="select comm_num,comm_title,comm_intro,type_name,comm_price,user_nickname,user_cardid,comm_date,user_image,comm_pic  from commodity,rela,user,type where user_cardid=rela_userid and type_id=comm_type and type_name=? and rela_commid=comm_num "
+				+ "and type_id=comm_type";
+		DBUtil util=new DBUtil();
+		Connection conn =  util.openConnection();
+		try {
+			PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
+
+			pstmt.setString(1, type);
+
+			ResultSet rs = (ResultSet) pstmt.executeQuery();
+			while (rs.next()) {
+				CommodityDetail commdetail=new CommodityDetail();
+				
+				User user=new User();	
+				user.setNickName(rs.getString(6));
+				user.setUserName(rs.getString(7));
+				user.setImg(rs.getString(9));
+				
+				Commodity comm=new Commodity();
+				comm.setCommNum(rs.getString(1));
+				comm.setCommTitle(rs.getString(2));
+				comm.setCommIntro(rs.getString(3));
+				comm.setCommPrice(rs.getInt(5));
+				comm.setCommDate(rs.getDate(8));
+				comm.setCommPic(rs.getString(10));
+				
+				commdetail.setUser(user);
+				commdetail.setCommdity(comm);
+				commdetail.setTypeName(rs.getString(4));
+				 detailList.add(commdetail);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		return detailList;
+	
+	}
 }

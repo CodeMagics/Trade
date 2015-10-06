@@ -62,6 +62,9 @@ public interface CommodityDao {
 	public boolean updatePicPathByCommNum(String CommNum,String path);
 	
 	
+	public List<CommodityDetail> selectByCommType(String type);
+	
+	
 
 	
 
