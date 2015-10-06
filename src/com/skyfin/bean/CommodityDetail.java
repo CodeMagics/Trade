@@ -40,5 +40,4 @@ public class CommodityDetail {
 		this.picPath = picPath;
 	}
 
-
 }

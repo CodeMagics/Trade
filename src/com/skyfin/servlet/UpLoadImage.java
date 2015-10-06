@@ -16,6 +16,7 @@ import com.skyfin.dao.AlbumDao;
 import com.skyfin.dao.CommodityDao;
 import com.skyfin.daoimpl.AlbumDaoImpl;
 import com.skyfin.daoimpl.CommodityImpl;
+import com.skyfin.util.ImageCompressUtil;
 import com.skyfin.util.StringRandom;
 
 import Decoder.BASE64Decoder;
@@ -51,9 +52,10 @@ this.doPost(request, response);
 	        String ImageName = StringRandom.getRandomString(36);
 	        //系统路径
 	         String path = "/usr/local/tomcat7/webapps/Trade/image/";
-	         
+	         //小图路径
+	         String minpath = "/usr/local/tomcat7/webapps/Trade/minimage/";
 	        //插入图片路径
-	         String picPath=ImageName+".png";
+	        String picPath=ImageName+".png";
 	        Album alb=new Album();
 	        alb.setAlbuId(commodityid);
 	        alb.setAlbuPic(picPath);
@@ -65,7 +67,6 @@ this.doPost(request, response);
 	        if(commPic == null || commPic.length() <= 0){
 	        	commDao.updatePicPathByCommNum(commodityid, picPath);
 	        }
-	        
 	        
 	        try {  
 	  
@@ -84,6 +85,8 @@ this.doPost(request, response);
 	            }  
 	            FileOutputStream out = new FileOutputStream(file);  
 	            out.write(photoimg);  
+	            
+	            ImageCompressUtil.saveMinPhoto(path+ImageName+".png", minpath+ImageName+".png", 400, 0.9d);
 	            out.flush();  
 	            out.close();   
 	        } catch (Exception e) {  

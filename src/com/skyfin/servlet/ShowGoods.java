@@ -2,7 +2,9 @@ package com.skyfin.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.skyfin.bean.CommodityDetail;
 import com.skyfin.dao.AlbumDao;
 import com.skyfin.dao.CommodityDao;
@@ -82,10 +86,12 @@ public class ShowGoods extends HttpServlet {
 		picPath=ablum.selectByCommId(commNum);
 		commdetail.setPicPath(picPath);
 		
-		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();  
+		String jsonString = gson.toJson(commdetail,CommodityDetail.class);  
+		out.println(jsonString); 
 		//תΪjson
-		String jsonStrng = JSON.toJSONString(commdetail);
-	    out.print(jsonStrng);
+		//String jsonStrng = JSON.toJSONString(commdetail);
+	   // out.print(jsonStrng);
 		
 		out.flush();
 		out.close();
