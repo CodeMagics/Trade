@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.skyfin.bean.Commodity;
 import com.skyfin.bean.Relation;
 import com.skyfin.util.*;
 import com.skyfin.dao.RelationDao;
@@ -135,5 +137,36 @@ public class RelationDaoImpl implements RelationDao{
 			util.closeConn(conn);
 		}
 		return null;
+	}
+	
+	public List<Commodity> showUploadComm(String userName){
+		String sql="select comm_id,comm_num,comm_title,comm_intro,comm_price,comm_pic,comm_type "
+				+ "from rela,commodity where rela.rela_userid=? and rela.rela_commid=commodity.comm_num";
+		DBUtil util=new DBUtil();
+		Connection conn = util.openConnection();
+		List<Commodity> commList=new ArrayList<Commodity>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, userName);
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Commodity comm = new Commodity();
+				comm.setId(rs.getInt(1));
+				comm.setCommNum(rs.getString(2));
+				comm.setCommTitle(rs.getString(3));
+				comm.setCommIntro(rs.getString(4));
+				comm.setCommPrice(rs.getInt(5) );
+				comm.setCommPic(rs.getString(6));
+				comm.setCommType(rs.getInt(7));
+				commList.add(comm);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+		return commList;
 	}
 }

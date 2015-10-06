@@ -1,6 +1,8 @@
 package com.skyfin.dao;
 
 import java.util.List;
+
+import com.skyfin.bean.Commodity;
 import com.skyfin.bean.Relation;
 
 public interface RelationDao {
@@ -33,4 +35,8 @@ public interface RelationDao {
 		 * @return 关系
 		 */
 		public Relation selectByCommId(String relaCommId);
+		/*
+		 * 查询一个人发布的所有商品
+		 */
+		public List<Commodity> showUploadComm(String userName);
 }
