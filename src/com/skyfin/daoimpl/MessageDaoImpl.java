@@ -69,5 +69,35 @@ public class MessageDaoImpl implements MessageDao {
 		 return messList;
 	 }
 	
+	public List<MessageDetail> select(String commNum){
+		List<MessageDetail>messList=new ArrayList<MessageDetail>();
+		String sql="select user_cardid,user_image,mess_content from user,message where mess_commnum=? and "
+				+ "mess_user=user_cardid";
+		DBUtil util=new DBUtil();
+		Connection conn = util.openConnection();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,commNum);
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				
+				MessageDetail mess=new MessageDetail();
+				mess.setUserName(rs.getString(1));
+				mess.setPicPath(rs.getString(2));
+				mess.setCommNum(commNum);
+				mess.setContent(rs.getString(3));		
+				messList.add(mess);
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.closeConn(conn);
+		}
+	 	
+		return messList;
+	}
+	
 
 }

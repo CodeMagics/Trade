@@ -2,6 +2,8 @@ package com.skyfin.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -69,27 +71,23 @@ public class ShowMessage extends HttpServlet {
 		// 输出流
 		PrintWriter out = response.getWriter();
 		//获取参数
-		String messUser = request.getParameter("messUser");
 		String messCommNum = request.getParameter("messCommNum");
 		
 		//获取param的内容
-		messUser = new String(messUser.getBytes("ISO-8859-1"), "UTF-8");
 		messCommNum = new String(messCommNum.getBytes("ISO-8859-1"),"UTF-8");
 	
-		MessageDetail messDetail=new MessageDetail();
+		List<MessageDetail>messDetailList=new ArrayList<MessageDetail>();
 		
 		MessageDao messDao =new MessageDaoImpl();
-		Message mess=new Message();
-		messDetail.setMessList(messDao.selectMessage(messUser, messCommNum));
+		messDetailList=messDao.select(messCommNum);
 		
-		UserDao userDao =new UserDaoImpl();
-		messDetail.setUser(userDao.info(messUser));
+		
 		//在本商品中未留言
-		if(messDetail.getMessList().size()<=0){
+		if(messDetailList.size()<=0){
 			out.print("121");	
 		}
 		else{
-			String jsonString =JSON.toJSONString(messDetail);
+			String jsonString =JSON.toJSONString(messDetailList);
 			out.print(jsonString);
 		}
 		out.flush();
