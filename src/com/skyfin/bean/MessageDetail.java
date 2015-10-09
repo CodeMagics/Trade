@@ -8,6 +8,7 @@ public class MessageDetail {
 	private String picPath;
 	private String commNum;
 	private String content;
+	private String nickName;
 	public String getUserName() {
 		return userName;
 	}
@@ -31,6 +32,12 @@ public class MessageDetail {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	
 

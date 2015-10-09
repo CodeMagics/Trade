@@ -71,7 +71,7 @@ public class MessageDaoImpl implements MessageDao {
 	
 	public List<MessageDetail> select(String commNum){
 		List<MessageDetail>messList=new ArrayList<MessageDetail>();
-		String sql="select user_cardid,user_image,mess_content from user,message where mess_commnum=? and "
+		String sql="select user_cardid,user_image,mess_content,user_nickname from user,message where mess_commnum=? and "
 				+ "mess_user=user_cardid";
 		DBUtil util=new DBUtil();
 		Connection conn = util.openConnection();
@@ -86,7 +86,8 @@ public class MessageDaoImpl implements MessageDao {
 				mess.setUserName(rs.getString(1));
 				mess.setPicPath(rs.getString(2));
 				mess.setCommNum(commNum);
-				mess.setContent(rs.getString(3));		
+				mess.setContent(rs.getString(3));
+				mess.setNickName(rs.getString(4));
 				messList.add(mess);
 			
 			}
