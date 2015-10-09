@@ -79,7 +79,7 @@ public class ShowTypeComm extends HttpServlet {
 		List<CommodityDetail> commdetail=new ArrayList<CommodityDetail>();
 		CommodityDao comm=new CommodityImpl();
 		commdetail=comm.selectByCommType(typeName);
-		
+		out.println("ด๓ะกฮช"+commdetail.size());
 		
 	
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
